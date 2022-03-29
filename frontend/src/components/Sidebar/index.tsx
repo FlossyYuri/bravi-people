@@ -7,7 +7,7 @@ import './menu.css';
 
 function Sidebar() {
   return (
-    <header className='fixed bg-white left-0 h-screen w-64 shadow'>
+    <aside className='fixed bg-white left-0 h-screen w-64 shadow-custom z-10'>
       <img
         className='rounded-full w-40 mx-auto mt-12'
         src={BraviLogo}
@@ -22,7 +22,7 @@ function Sidebar() {
           <DashboardIcon /> Dashboard
         </Link>
       </ul>
-    </header>
+    </aside>
   );
 }
 

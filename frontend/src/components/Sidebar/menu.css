@@ -1,0 +1,30 @@
+:root {
+  --main-color: #5e7bf7;
+  --text-color: #3e3c5b;
+}
+.nav-link {
+  position: relative;
+  text-align: center;
+}
+.nav-link.active {
+  background: linear-gradient(89.77deg, #eef0ff 0.17%, #ffffff 99.8%);
+  font-weight: bold;
+}
+.nav-link svg {
+  fill: var(--text-color);
+  margin-right: 1rem;
+  transform: scale(0.9);
+}
+.nav-link.active svg {
+  fill: var(--main-color);
+}
+.nav-link.active::before {
+  position: absolute;
+  left: 0;
+  top: 10%;
+  content: '';
+  width: 0.4rem;
+  height: 80%;
+  border-radius: 4px;
+  background-color: var(--main-color);
+}

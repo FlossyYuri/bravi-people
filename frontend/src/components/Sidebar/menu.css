@@ -9,11 +9,12 @@
 }
 .nav-link::before {
   position: absolute;
-  left: 0;
+  left: -0.4rem;
   top: 10%;
   content: '';
-  width: 0rem;
   height: 80%;
+  width: 0.4rem;
+  border-radius: 4px;
   background-color: var(--main-color);
   transition: 200ms all ease-in-out;
 }
@@ -39,6 +40,5 @@
 }
 .nav-link.active::before,
 .nav-link:hover::before {
-  width: 0.4rem;
-  border-radius: 4px;
+  left: 0rem;
 }

@@ -10,14 +10,16 @@ function Routes() {
       <div className='bg-main-BG min-h-screen text-main-text'>
         <Sidebar />
         <Header />
-        <main className='h-screen pl-64 bg-red-50 w-full'>
-          <Switch>
-            <Route exact path='/contacts' component={ContactHome} />
-            <Route exact path='/dashboard' component={ContactHome} />
-            <Route path='/*'>
-              <Redirect to='/contacts' />
-            </Route>
-          </Switch>
+        <main className='h-screen pl-64 pt-16 w-full'>
+          <div className='container '>
+            <Switch>
+              <Route exact path='/contacts' component={ContactHome} />
+              <Route exact path='/dashboard' component={ContactHome} />
+              <Route path='/*'>
+                <Redirect to='/contacts' />
+              </Route>
+            </Switch>
+          </div>
         </main>
       </div>
     </BrowserRouter>

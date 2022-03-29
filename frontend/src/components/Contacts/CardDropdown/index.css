@@ -1,0 +1,12 @@
+.context-menu {
+  animation: grow-spawn 150ms normal;
+}
+
+@keyframes grow-spawn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}

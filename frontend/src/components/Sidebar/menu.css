@@ -5,8 +5,20 @@
 .nav-link {
   position: relative;
   text-align: center;
+  transition: 200ms all ease-in-out;
 }
-.nav-link.active {
+.nav-link::before {
+  position: absolute;
+  left: 0;
+  top: 10%;
+  content: '';
+  width: 0rem;
+  height: 80%;
+  background-color: var(--main-color);
+  transition: 200ms all ease-in-out;
+}
+.nav-link.active,
+.nav-link:hover {
   background: linear-gradient(89.77deg, #eef0ff 0.17%, #ffffff 99.8%);
   font-weight: bold;
 }
@@ -14,17 +26,19 @@
   fill: var(--text-color);
   margin-right: 1rem;
   transform: scale(0.9);
+  transition: 200ms all ease-in-out;
+}
+.nav-link:hover {
+  color: var(--main-color);
+}
+.nav-link:hover svg {
+  fill: var(--main-color);
 }
 .nav-link.active svg {
   fill: var(--main-color);
 }
-.nav-link.active::before {
-  position: absolute;
-  left: 0;
-  top: 10%;
-  content: '';
+.nav-link.active::before,
+.nav-link:hover::before {
   width: 0.4rem;
-  height: 80%;
   border-radius: 4px;
-  background-color: var(--main-color);
 }

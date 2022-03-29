@@ -1,7 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CONTACT_REPOSITORY } from 'src/core/constants';
-import { Contact as ContactInterface } from './interfaces/contacts.interface';
 import { Contact } from './contact.entity';
+import { ContactUpdateDto } from './dto/contact-update.dto';
+import { ContactDto } from './dto/contact.dto';
 
 @Injectable()
 export class ContactsService {
@@ -10,11 +11,29 @@ export class ContactsService {
     private readonly contactRepository: typeof Contact,
   ) {}
 
-  async create(contact: ContactInterface) {
+  async create(contact: ContactDto) {
     return await this.contactRepository.create<Contact>(contact);
+  }
+
+  async update(id, contact: ContactUpdateDto) {
+    return await this.contactRepository.update(
+      { ...contact },
+      {
+        where: {
+          id,
+        },
+      },
+    );
+  }
+
+  async delete(id: number) {
+    return await this.contactRepository.destroy({ where: { id } });
   }
 
   async findAll(): Promise<Contact[]> {
     return await this.contactRepository.findAll();
+  }
+  async findOne(id: number): Promise<Contact> {
+    return await this.contactRepository.findByPk(id);
   }
 }

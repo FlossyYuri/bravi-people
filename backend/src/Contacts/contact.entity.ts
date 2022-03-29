@@ -17,6 +17,7 @@ export class Contact extends Model<Contact> {
   @Column({
     type: DataType.STRING,
     allowNull: true,
+    unique: true,
   })
   email: string;
 

@@ -7,6 +7,7 @@ export interface ButtonInterface {
   children?: React.ReactNode;
   type?: 'button' | 'reset' | 'submit' | undefined;
   className?: string;
+  active?: boolean;
   alt?: boolean;
 }
 

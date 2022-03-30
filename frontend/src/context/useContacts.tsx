@@ -10,15 +10,15 @@ interface Props {
   children: React.ReactNode;
 }
 interface ContactProviderProps {
-  fetchData: () => void;
+  fetchData: (params?: object) => void;
   contacts: Contact[];
   setContacts: (value: Contact[]) => void;
 }
 export const ContactProvider = ({ children }: Props) => {
   const [contacts, setContacts] = useState<Contact[]>([]);
 
-  const fetchData = useCallback(() => {
-    APIKit.get<Contact[]>('/contacts').then(
+  const fetchData = useCallback((params?) => {
+    APIKit.get<Contact[]>('/contacts', { params }).then(
       (response: AxiosResponse<Contact[]>) => {
         setContacts(response.data);
       }

@@ -7,7 +7,7 @@ import './menu.css';
 
 function Sidebar() {
   return (
-    <aside className='fixed bg-white left-0 h-screen w-64 shadow-custom z-10'>
+    <aside className='fixed bg-white lg:left-0 h-screen w-64 -left-64 shadow-custom z-10'>
       <img
         className='rounded-full w-40 mx-auto mt-12'
         src={BraviLogo}

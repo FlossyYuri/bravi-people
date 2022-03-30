@@ -11,8 +11,8 @@ function Routes() {
       <div className='bg-main-BG min-h-screen text-main-text'>
         <Sidebar />
         <Header />
-        <main className='h-screen pl-64 pt-16 w-full'>
-          <div className='container '>
+        <main className='h-screen lg:pl-64 pl-0 pt-16 w-full'>
+          <div className='w-full'>
             <ContactProvider>
               <Switch>
                 <Route path='/contacts'>

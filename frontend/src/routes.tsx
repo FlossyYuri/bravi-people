@@ -13,15 +13,15 @@ function Routes() {
         <Header />
         <main className='h-screen pl-64 pt-16 w-full'>
           <div className='container '>
-            <Switch>
-              <ContactProvider>
-                <Route exact path='/contacts' component={ContactHome} />
-              </ContactProvider>
-              <Route exact path='/dashboard' component={ContactHome} />
-              <Route path='/*'>
+            <ContactProvider>
+              <Switch>
+                <Route path='/contacts'>
+                  <ContactHome />
+                </Route>
+                <Route exact path='/dashboard' component={ContactHome} />
                 <Redirect to='/contacts' />
-              </Route>
-            </Switch>
+              </Switch>
+            </ContactProvider>
           </div>
         </main>
       </div>

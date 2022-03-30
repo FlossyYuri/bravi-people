@@ -23,3 +23,5 @@ export const TOAST_STYLE = {
   boxShadow: '0px 4px 4px #CBCBDC44',
   color: '#3E3C5B',
 };
+
+export const API_URL = 'http://localhost:5000/api/v1';

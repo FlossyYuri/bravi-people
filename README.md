@@ -47,6 +47,7 @@
 [<img src="screen.png" />](https://bravi-people-iy3zxzh07-flossyyuri.vercel.app/contacts)
 
 A Progressive Web Application that allows any user to search, save, update and delete contacts.
+[Click Here to see the Figma Prototype](https://www.figma.com/file/51F4IoQ9Qr5moCyYEqjbVd/Bravi-People)
 
 
 ### Built With

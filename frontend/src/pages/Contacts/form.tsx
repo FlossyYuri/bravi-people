@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import toast, { Toaster } from 'react-hot-toast';
@@ -6,11 +6,13 @@ import * as yup from 'yup';
 import Button from '../../components/Forms/Buttons/button';
 import TextInput from '../../components/Forms/Inputs/TextInput';
 import { Contact } from '../../interfaces/common';
-import { ERROR_MESSAGES } from '../../constants';
+import { ERROR_MESSAGES, TOAST_STYLE } from '../../constants';
 import CloseIcon from '../../assets/svgs/close';
 import { APIKit } from '../../services/api';
 interface ContactFormInterface {
   close: () => void;
+  update?: boolean;
+  contact?: Contact;
 }
 const schema = yup
   .object({
@@ -28,7 +30,7 @@ const schema = yup
   })
   .required();
 
-function ContactForm({ close }: ContactFormInterface) {
+function ContactForm({ close, update, contact }: ContactFormInterface) {
   const {
     register,
     handleSubmit,
@@ -36,26 +38,41 @@ function ContactForm({ close }: ContactFormInterface) {
   } = useForm<Contact>({
     resolver: yupResolver(schema),
     defaultValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      phoneNumber: '',
-      whatsapp: '',
+      firstName: contact?.firstName,
+      lastName: contact?.lastName,
+      email: contact?.email,
+      phoneNumber: contact?.phoneNumber,
+      whatsapp: contact?.whatsapp,
     },
   });
+  const submitData = useCallback(
+    (data) => {
+      if (!update) {
+        APIKit.post('/contacts', data)
+          .then(() => {
+            toast.success('Contact saved successfully!');
+          })
+          .catch(() => {
+            toast.error('Error saving contact!');
+          })
+          .finally(() => close());
+        return;
+      }
+      APIKit.put(`/contacts/${contact?.id}`, data)
+        .then(() => {
+          toast.success('Contact edited successfully!');
+        })
+        .catch(() => {
+          toast.error('Error saving contact!');
+        })
+        .finally(() => close());
+    },
+    [contact, close, update]
+  );
   return (
     <div className='fade-spawn bg-slate-700 bg-opacity-40 w-screen h-screen fixed top-0 left-0 z-20 flex items-center justify-center'>
       <form
-        onSubmit={handleSubmit((data) => {
-          APIKit.post('/contacts', data)
-            .then(() => {
-              close();
-              toast.success('Contacto cadastrado com sucesso!');
-            })
-            .catch(() => {
-              toast.error('Erro ao cadastrar contacto!');
-            });
-        })}
+        onSubmit={handleSubmit(submitData)}
         className='bg-white rounded-lg max-w-full w-modal p-4 relative'
       >
         <button
@@ -70,7 +87,9 @@ function ContactForm({ close }: ContactFormInterface) {
             <span className='text-8xl font-bold'>#</span>
           </div>
         </div>
-        <h2 className='text-2xl font-bold mt-4'>Add a new Contact</h2>
+        <h2 className='text-2xl font-bold mt-4'>
+          {update ? 'Edit Contact' : 'Add a new Contact'}
+        </h2>
         <div className='grid grid-cols-2 gap-4 w-full'>
           <TextInput
             label='First Name'
@@ -120,7 +139,11 @@ function ContactForm({ close }: ContactFormInterface) {
           <Button type='submit'>Save</Button>
         </div>
       </form>
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          style: TOAST_STYLE,
+        }}
+      />
     </div>
   );
 }

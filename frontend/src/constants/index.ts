@@ -16,3 +16,10 @@ export const SHORT_MONTHS = [
 export const ERROR_MESSAGES = {
   REQUIRED: 'This field is required',
 };
+
+export const TOAST_STYLE = {
+  backgroundColor: '#F7F6FB',
+  borderRadius: 16,
+  boxShadow: '0px 4px 4px #CBCBDC44',
+  color: '#3E3C5B',
+};

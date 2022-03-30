@@ -7,8 +7,10 @@ import EditIcon from '../../assets/svgs/edit';
 import GMailIcon from '../../assets/svgs/gmail';
 import OptionsIcon from '../../assets/svgs/options';
 import WhatsAppIcon from '../../assets/svgs/whatsapp';
+import { TOAST_STYLE } from '../../constants';
 import { useContact } from '../../context/useContacts';
 import { Contact } from '../../interfaces/common';
+import ContactForm from '../../pages/Contacts/form';
 import { APIKit } from '../../services/api';
 import ConfirmationModal from '../Modals/Confirmations';
 import CardDropdown from './CardDropdown';
@@ -22,6 +24,7 @@ function ContactCard({
   whatsapp,
 }: Contact) {
   const [isVisible, setVisibility] = useState(false);
+  const [formModal, setFormModal] = useState(false);
   const [removeModal, setRemoveModal] = useState(false);
   const { fetchData } = useContact();
   const toggleDropdown = useCallback(
@@ -52,7 +55,9 @@ function ContactCard({
         visibility={isVisible}
         items={[
           {
-            onClick: () => {},
+            onClick: () => {
+              setFormModal(true);
+            },
             text: 'Edit',
             icon: (
               <EditIcon className='transition-all fill-main-text group-hover:fill-white' />
@@ -96,7 +101,21 @@ function ContactCard({
           <CellIcon />
         </a>
       </div>
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          style: TOAST_STYLE,
+        }}
+      />
+      {formModal ? (
+        <ContactForm
+          contact={{ id, firstName, lastName, email, phoneNumber, whatsapp }}
+          update
+          close={() => {
+            setFormModal(false);
+            fetchData();
+          }}
+        />
+      ) : null}
       {removeModal ? (
         <ConfirmationModal
           title='Want to remove?'

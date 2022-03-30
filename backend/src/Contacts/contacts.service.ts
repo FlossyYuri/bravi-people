@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { CONTACT_REPOSITORY } from 'src/core/constants';
+import { CONTACT_REPOSITORY } from '../core/constants';
 import { Contact } from './contact.entity';
 import { ContactUpdateDto } from './dto/contact-update.dto';
 import { ContactDto } from './dto/contact.dto';

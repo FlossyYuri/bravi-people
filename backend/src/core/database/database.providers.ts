@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
-import { Contact } from 'src/contacts/contact.entity';
+import { Contact } from '../../contacts/contact.entity';
 import { SEQUELIZE, DEVELOPMENT, TEST, PRODUCTION } from '../constants';
 import { databaseConfig } from './database.config';
 

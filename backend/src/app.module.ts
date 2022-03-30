@@ -8,8 +8,8 @@ import { DatabaseModule } from './core/database/database.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    ContactsModule,
     DatabaseModule,
+    ContactsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

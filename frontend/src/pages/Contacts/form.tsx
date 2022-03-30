@@ -70,10 +70,10 @@ function ContactForm({ close, update, contact }: ContactFormInterface) {
     [contact, close, update]
   );
   return (
-    <div className='fade-spawn bg-slate-700 bg-opacity-40 w-screen h-screen fixed top-0 left-0 z-20 flex items-center justify-center'>
+    <div className='fade-spawn bg-slate-700 bg-opacity-40 w-screen h-screen fixed top-0 left-0 z-20 flex items-center justify-center p-4 overflow-y-scroll'>
       <form
         onSubmit={handleSubmit(submitData)}
-        className='bg-white rounded-lg max-w-full w-modal p-4 relative'
+        className='bg-white rounded-lg max-w-full w-modal p-4 relative max-h-modal sm:max-h-full overflow-y-auto sm:overflow-visible'
       >
         <button
           type='button'
@@ -82,7 +82,7 @@ function ContactForm({ close, update, contact }: ContactFormInterface) {
         >
           <CloseIcon />
         </button>
-        <div className='w-40 h-40 -mt-24 bg-main-gray rounded-full flex justify-center items-center mx-auto'>
+        <div className='w-40 h-40 mt-0 sm:-mt-24 bg-main-gray rounded-full flex justify-center items-center mx-auto'>
           <div className='w-full h-full scale-90 bg-transparent border border-white rounded-full flex justify-center items-center'>
             <span className='text-8xl font-bold'>#</span>
           </div>
@@ -98,6 +98,7 @@ function ContactForm({ close, update, contact }: ContactFormInterface) {
             register={register}
             errors={errors}
             validation={{ required: true }}
+            className='col-span-2 md:col-span-1'
           />
           <TextInput
             label='Last Name'
@@ -106,6 +107,7 @@ function ContactForm({ close, update, contact }: ContactFormInterface) {
             register={register}
             errors={errors}
             validation={{ required: true }}
+            className='col-span-2 md:col-span-1'
           />
           <TextInput
             className='col-span-2'

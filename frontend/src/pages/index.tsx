@@ -14,6 +14,7 @@ interface Query {
 }
 function Contacts() {
   const [formModal, setFormModal] = useState(false);
+  const [grid, setToggle] = useState<boolean>(true);
   const [params, setParams] = useState<Query>({ sort: 'ASC' });
   const { contacts, fetchData } = useContact();
   useEffect(() => {
@@ -22,10 +23,10 @@ function Contacts() {
   return (
     <section className='p-8'>
       <h1 className='font-bold text-2xl'>Contacts</h1>
-      <div className='flex mt-2 mb-8 justify-between'>
-        <div className='flex gap-4 flex-wrap'>
+      <div className='flex mt-2 mb-8 justify-between flex-wrap'>
+        <div className='grid grid-cols-2 w-full sm:w-auto sm:flex gap-4 flex-wrap'>
           <TextInput
-            className='w-52'
+            className='w-full sm:w-52 col-span-2'
             search
             onChange={(e) => setParams({ ...params, name: e.target.value })}
             name='search'
@@ -39,13 +40,21 @@ function Contacts() {
               })
             }
             active={params.sort === 'ASC'}
-            className='flex items-center text-main-text'
+            className='flex items-center justify-center text-main-text'
           >
             A-Z <ArrowUpDownIcon className='ml-2' />
           </AlternativeButton>
-          <GridToggle />
+          <GridToggle
+            className='col-span-1 justify-center'
+            grid={grid}
+            toggle={() => {
+              setToggle(!grid);
+            }}
+          />
         </div>
-        <Button onClick={() => setFormModal(true)}>Add</Button>
+        <Button className='mt-4 sm:mt-0' onClick={() => setFormModal(true)}>
+          Add
+        </Button>
       </div>
       <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4'>
         {contacts.map((contact) => (

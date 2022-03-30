@@ -28,6 +28,9 @@ module.exports = {
       },
       maxWidth: {
         'dropdown': '200px',
+      },
+      maxHeight: {
+        'modal': '80%',
       }
     },
   },

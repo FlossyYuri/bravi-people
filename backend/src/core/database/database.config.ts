@@ -11,7 +11,6 @@ export const databaseConfig: IDatabaseConfig = {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: process.env.DB_DIALECT,
-    urlDatabase: process.env.DATABASE_URL,
   },
   test: {
     username: process.env.DB_USER,
@@ -20,7 +19,6 @@ export const databaseConfig: IDatabaseConfig = {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     dialect: process.env.DB_DIALECT,
-    urlDatabase: process.env.DATABASE_URL,
   },
   production: {
     username: process.env.DB_USER,
@@ -28,6 +26,16 @@ export const databaseConfig: IDatabaseConfig = {
     database: process.env.DB_NAME_PRODUCTION,
     host: process.env.DB_HOST,
     dialect: process.env.DB_DIALECT,
-    urlDatabase: process.env.DATABASE_URL,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false, // <<<<<<< YOU NEED THIS
+      },
+    },
+    pool: {
+      max: 20,
+      min: 0,
+      idle: 5000,
+    },
   },
 };

@@ -34,22 +34,20 @@ export class ContactsService {
   }
 
   async findAll(query: ContactQuery): Promise<Contact[]> {
-    const { firstName, lastName, sort } = query;
+    const { name, sort } = query;
 
-    let where: WhereOptions<ContactQuery> = {};
+    let where: WhereOptions<ContactDto> = {};
     const order: Order = [];
     const ors = [];
-    if (firstName) {
+    if (name) {
       ors.push({
         firstName: {
-          [Op.substring]: firstName,
+          [Op.substring]: name,
         },
       });
-    }
-    if (lastName) {
       ors.push({
         lastName: {
-          [Op.substring]: lastName,
+          [Op.substring]: name,
         },
       });
     }

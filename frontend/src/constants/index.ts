@@ -24,4 +24,4 @@ export const TOAST_STYLE = {
   color: '#3E3C5B',
 };
 
-export const API_URL = 'http://localhost:5000/api/v1';
+export const API_URL = 'http://localhost:8080/api/v1';

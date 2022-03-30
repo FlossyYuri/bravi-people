@@ -3,7 +3,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
+  <a href="https://bravi-people-iy3zxzh07-flossyyuri.vercel.app/contacts">
     <img style="border-radius: 100px;" src="frontend/public/bravi-logo.jpg" alt="Logo" width="80" height="80">
   </a>
 
@@ -12,7 +12,7 @@
   <p align="center">
     An app that allows you to store people and their contacts.
     <br />
-    <a href="https://github.com/github_username/repo_name">View App</a>
+    <a href="https://bravi-people-iy3zxzh07-flossyyuri.vercel.app/contacts">View App</a>
     ·
     <a href="mailto:emerson.yur@gmail.com">Get in touch</a>
   </p>
@@ -35,12 +35,8 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
+    <li><a href="#requirements">Requirements</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -48,7 +44,7 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[<img src="screen.png" />](https://bravi-people-iy3zxzh07-flossyyuri.vercel.app/contacts)
 
 A Progressive Web Application that allows any user to search, save, update and delete contacts.
 
@@ -118,7 +114,7 @@ Before trying to run the project you should have installed [Node.JS](https://nod
    yarn start
    ```
 
-<!-- ROADMAP -->
+<!-- Requirements -->
 
 ## Requirements
 
@@ -133,6 +129,6 @@ Before trying to run the project you should have installed [Node.JS](https://nod
 
 Émerson Yuri Cuambe - [LinkedIn](https://www.linkedin.com/in/emerson-yuri-1b9562113/) - [Email](email@email_client.com) 
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+Project Link: [https://bravi-people-iy3zxzh07-flossyyuri.vercel.app/contacts](https://bravi-people-iy3zxzh07-flossyyuri.vercel.app/contacts)
 
 <p align="right">(<a href="#top">back to top</a>)</p>

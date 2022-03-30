@@ -5,3 +5,8 @@ export interface Contact {
   phoneNumber?: string;
   whatsapp?: string;
 }
+export interface ContactQuery {
+  firstName?: string;
+  lastName?: string;
+  sort?: 'ASC' | 'DESC';
+}

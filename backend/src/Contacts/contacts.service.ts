@@ -1,8 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { Op } from 'sequelize';
+import { WhereOptions, Order } from 'sequelize/types';
 import { CONTACT_REPOSITORY } from '../core/constants';
 import { Contact } from './contact.entity';
 import { ContactUpdateDto } from './dto/contact-update.dto';
 import { ContactDto } from './dto/contact.dto';
+import { ContactQuery } from './interfaces/contacts.interface';
 
 @Injectable()
 export class ContactsService {
@@ -30,8 +33,34 @@ export class ContactsService {
     return await this.contactRepository.destroy({ where: { id } });
   }
 
-  async findAll(): Promise<Contact[]> {
-    return await this.contactRepository.findAll();
+  async findAll(query: ContactQuery): Promise<Contact[]> {
+    const { firstName, lastName, sort } = query;
+
+    let where: WhereOptions<ContactQuery> = {};
+    const order: Order = [];
+    const ors = [];
+    if (firstName) {
+      ors.push({
+        firstName: {
+          [Op.substring]: firstName,
+        },
+      });
+    }
+    if (lastName) {
+      ors.push({
+        lastName: {
+          [Op.substring]: lastName,
+        },
+      });
+    }
+    if (ors.length) where = { [Op.or]: ors };
+
+    if (sort && (sort === 'ASC' || sort === 'DESC'))
+      order.push(['firstName', sort || 'ASC']);
+    return await this.contactRepository.findAll({
+      where,
+      order,
+    });
   }
   async findOne(id: number): Promise<Contact> {
     return await this.contactRepository.findByPk(id);

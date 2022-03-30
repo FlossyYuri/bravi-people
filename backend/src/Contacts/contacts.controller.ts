@@ -6,18 +6,19 @@ import {
   Param,
   Post,
   Put,
+  Query,
 } from '@nestjs/common';
 import { ContactsService } from './contacts.service';
 import { ContactUpdateDto } from './dto/contact-update.dto';
 import { ContactDto } from './dto/contact.dto';
-import { Contact } from './interfaces/contacts.interface';
+import { Contact, ContactQuery } from './interfaces/contacts.interface';
 
 @Controller('contacts')
 export class ContactsController {
   constructor(private contactsServices: ContactsService) {}
   @Get()
-  async findAll(): Promise<Contact[]> {
-    return await this.contactsServices.findAll();
+  async findAll(@Query() query: ContactQuery): Promise<Contact[]> {
+    return await this.contactsServices.findAll(query);
   }
 
   @Get(':id')

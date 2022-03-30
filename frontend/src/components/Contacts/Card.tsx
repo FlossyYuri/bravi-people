@@ -1,4 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import CellIcon from '../../assets/svgs/cell';
 import ChecklistIcon from '../../assets/svgs/checklist';
 import DeleteIcon from '../../assets/svgs/delete';
@@ -6,14 +7,15 @@ import EditIcon from '../../assets/svgs/edit';
 import GMailIcon from '../../assets/svgs/gmail';
 import OptionsIcon from '../../assets/svgs/options';
 import WhatsAppIcon from '../../assets/svgs/whatsapp';
+import ConfirmationModal from '../Modals/Confirmations';
 import CardDropdown from './CardDropdown';
 
 interface Props {
   firstName: string;
   lastName: string;
-  email: string;
-  phoneNumber: string;
-  whatsapp: string;
+  email: string | undefined;
+  phoneNumber: string | undefined;
+  whatsapp: string | undefined;
 }
 function ContactCard({
   firstName,
@@ -23,10 +25,12 @@ function ContactCard({
   whatsapp,
 }: Props) {
   const [isVisible, setVisibility] = useState(false);
+  const [removeModal, setRemoveModal] = useState(false);
   const toggleDropdown = useCallback(
     () => setVisibility(!isVisible),
     [isVisible]
   );
+  const close = useCallback(() => setRemoveModal(false), []);
   const options = useRef<HTMLButtonElement>(null);
   return (
     <article className='bg-white flex flex-col rounded-xl overflow-hidden'>
@@ -50,9 +54,7 @@ function ContactCard({
         visibility={isVisible}
         items={[
           {
-            onClick: () => {
-              console.log(1);
-            },
+            onClick: () => {},
             text: 'Edit',
             icon: (
               <EditIcon className='transition-all fill-main-text group-hover:fill-white' />
@@ -60,7 +62,7 @@ function ContactCard({
           },
           {
             onClick: () => {
-              console.log(2);
+              setRemoveModal(true);
             },
             text: 'Delete',
             icon: (
@@ -83,13 +85,39 @@ function ContactCard({
         <a href={`mailto:${email}`} className='scale-90'>
           <GMailIcon />
         </a>
-        <a href={`https://wa.me/${whatsapp}`} className='scale-90'>
+        <a
+          href={`https://wa.me/${whatsapp?.replaceAll(' ', '')}`}
+          className='scale-90'
+        >
           <WhatsAppIcon />
         </a>
-        <a href={`tel:${phoneNumber}`} className='scale-90'>
+        <a
+          href={`tel:${phoneNumber?.replaceAll(' ', '')}`}
+          className='scale-90'
+        >
           <CellIcon />
         </a>
       </div>
+      <Toaster />
+      {removeModal ? (
+        <ConfirmationModal
+          title='Want to remove?'
+          description='Are you sure that you want to delete?'
+          confirm={{
+            onClick: () => {
+              toast.success('Contact Removed!');
+              close();
+            },
+            text: 'Delete',
+          }}
+          cancel={{
+            onClick: () => {
+              close();
+            },
+            text: 'Cancel',
+          }}
+        />
+      ) : null}
     </article>
   );
 }

@@ -7,7 +7,6 @@ import TextInput from '../../components/Forms/Inputs/TextInput';
 import { Contact } from '../../interfaces/common';
 import { ERROR_MESSAGES } from '../../constants';
 import CloseIcon from '../../assets/svgs/close';
-import './create.css';
 interface ContactFormInterface {
   close: () => void;
 }
@@ -43,7 +42,7 @@ function ContactForm({ close }: ContactFormInterface) {
     },
   });
   return (
-    <div className='form-modal bg-slate-700 bg-opacity-40 w-screen h-screen fixed top-0 left-0 z-20 flex items-center justify-center'>
+    <div className='fade-spawn bg-slate-700 bg-opacity-40 w-screen h-screen fixed top-0 left-0 z-20 flex items-center justify-center'>
       <form
         onSubmit={handleSubmit((data) => {
           alert(JSON.stringify(data));

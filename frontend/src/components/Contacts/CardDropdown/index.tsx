@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import './index.css';
 
 interface ContextItems {
   onClick: () => void;
@@ -45,7 +44,7 @@ const CardDropdown = ({
   return visibility ? (
     <div
       ref={dropdownRef}
-      className='context-menu fixed z-20 rounded-lg p-2 w-fit bg-main-BG shadow-lg min-w-dropdown max-w-dropdown'
+      className='grow-spawn fixed z-20 rounded-lg p-2 w-fit bg-main-BG shadow-lg min-w-dropdown max-w-dropdown'
       style={style}
     >
       {items.map((item, index) => {

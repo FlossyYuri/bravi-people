@@ -1,13 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { AxiosResponse } from 'axios';
 import ArrowUpDownIcon from '../assets/svgs/arrowUpDown';
 import ContactCard from '../components/Contacts/Card';
 import AlternativeButton from '../components/Forms/Buttons/alternativeButton';
 import Button from '../components/Forms/Buttons/button';
 import GridToggle from '../components/Forms/Inputs/GridToggle';
+import { Contact } from '../interfaces/common';
+import { APIKit } from '../services/api';
 import ContactForm from './Contacts/form';
+import ConfirmationModal from '../components/Modals/Confirmations';
 
 function Contacts() {
   const [formModal, setFormModal] = useState(false);
+  const [contacts, setContacts] = useState<Contact[]>([]);
+
+  useEffect(() => {
+    APIKit.get<Contact[]>('/contacts').then(
+      (response: AxiosResponse<Contact[]>) => {
+        setContacts(response.data);
+      }
+    );
+  }, []);
+
   return (
     <section className='p-8'>
       <h1 className='font-bold text-2xl'>Contacts</h1>
@@ -26,15 +40,21 @@ function Contacts() {
         </div>
         <Button onClick={() => setFormModal(true)}>Add</Button>
       </div>
-      <section className='grid grid-cols-3'>
-        <ContactCard
-          email='emerson.yur@gmail.com'
-          phoneNumber='+55 (11) 1903 892'
-          firstName='Emerson'
-          lastName='Yuri'
-          whatsapp='+55 (11) 1903 892'
-        />
+      <section className='grid grid-cols-3 gap-4'>
+        {contacts.map(
+          ({ id, email, phoneNumber, firstName, lastName, whatsapp }) => (
+            <ContactCard
+              key={id}
+              email={email}
+              phoneNumber={phoneNumber}
+              firstName={firstName}
+              lastName={lastName}
+              whatsapp={whatsapp}
+            />
+          )
+        )}
       </section>
+
       {formModal ? <ContactForm close={() => setFormModal(false)} /> : null}
     </section>
   );

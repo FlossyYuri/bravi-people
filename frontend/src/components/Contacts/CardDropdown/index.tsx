@@ -45,7 +45,7 @@ const CardDropdown = ({
   return visibility ? (
     <div
       ref={dropdownRef}
-      className='context-menu transition-all fixed z-20 rounded-lg p-2 w-fit bg-main-BG shadow-lg min-w-dropdown max-w-dropdown'
+      className='context-menu fixed z-20 rounded-lg p-2 w-fit bg-main-BG shadow-lg min-w-dropdown max-w-dropdown'
       style={style}
     >
       {items.map((item, index) => {

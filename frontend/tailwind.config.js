@@ -10,6 +10,7 @@ module.exports = {
           BG: '#F7F6FB',
           text: '#3E3C5B',
           "light-gray": '#ECEDF6',
+          "input": '#ECEDF6',
           "gray": '#EEF0FF',
           "dark-gray": '#CBCBDC',
         },

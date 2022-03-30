@@ -1,5 +1,5 @@
 import React from 'react';
-import { ButtonInterface } from '../../interfaces/common';
+import { ButtonInterface } from '../../../interfaces/common';
 
 function AlternativeButton({ children, className, onClick }: ButtonInterface) {
   return (

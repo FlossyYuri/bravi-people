@@ -1,5 +1,5 @@
 import React from 'react';
-import { ButtonInterface } from '../../interfaces/common';
+import { ButtonInterface } from '../../../interfaces/common';
 
 function Button({ children, onClick }: ButtonInterface) {
   return (

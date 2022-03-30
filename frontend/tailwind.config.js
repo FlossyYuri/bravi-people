@@ -17,9 +17,14 @@ module.exports = {
       },
       boxShadow: {
         'custom': '4px 0px 16px #CBCBDC',
+        'main': '0px 0px 0px 2px #5E7BF7',
       },
       minWidth: {
         'dropdown': '160px',
+        'button': '140px',
+      },
+      width: {
+        'modal': '500px',
       },
       maxWidth: {
         'dropdown': '200px',

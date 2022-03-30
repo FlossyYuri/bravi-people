@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import GridIcon from '../../../assets/svgs/grid';
 import ListIcon from '../../../assets/svgs/list';
 
-interface GridToggleProp {}
+// interface GridToggleProp {}
 
-function GridToggle({}: GridToggleProp) {
+function GridToggle() {
   const [grid, setToggle] = useState<boolean>(true);
   return (
     <div className='rounded-lg py-1 px-2 bg-main-input font-semibold text-white flex'>

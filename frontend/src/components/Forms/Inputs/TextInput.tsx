@@ -1,50 +1,48 @@
 import React from 'react';
-import SearchIcon from '../../../assets/svgs/search';
+import { RegisterOptions, UseFormRegister } from 'react-hook-form';
 
 interface TextInputProps {
   name: string;
   label?: string;
   placeholder: string;
-  type: React.HTMLInputTypeAttribute;
+  validation?: RegisterOptions;
+  type?: React.HTMLInputTypeAttribute;
   className?: string;
   disabled?: boolean;
   search?: boolean;
-  error?: string;
-  inputEvent?: (value: string) => void;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  errors?: any;
+  register: UseFormRegister<any>;
 }
 const TextInput = ({
   name,
   label,
-  type,
-  search,
+  type = 'text',
+  validation = {},
   placeholder,
-  onChange,
-  inputEvent,
-  className,
+  register,
+  className = '',
   disabled,
-  error,
+  errors,
 }: TextInputProps) => {
-  const inputChanged: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    if (inputEvent) inputEvent(event.target.value);
-  };
   return (
-    <div className={`${className}`}>
-      <label htmlFor={name} className='control-label'>
+    <div className={`w-full ${className}`}>
+      <label htmlFor={name} className='text-main-text'>
         {label}
       </label>
-      <div className='flex rounded-lg bg-main-input items-center px-4'>
-        <input
-          className='bg-transparent text-main-text py-2 focus:ring-0 focus:outline-none'
-          id={name}
-          type={type}
-          placeholder={placeholder}
-          disabled={disabled}
-          onChange={onChange || inputChanged}
-        />
-        {search ? <SearchIcon /> : null}
-      </div>
-      {error ? <span>{error}</span> : null}
+      <div className={`flex items-center `}></div>
+      <input
+        className={`transition-all rounded-lg w-full bg-main-input bg-transparent text-main-text py-3 focus:shadow-main focus:ring-0 focus:outline-none px-4 ${
+          label ? 'mt-2' : ''
+        }`}
+        id={name}
+        type={type}
+        placeholder={placeholder}
+        disabled={disabled}
+        {...register(name, validation)}
+      />
+      {errors[name] ? (
+        <span className='text-red-500 text-sm'>{errors[name].message}</span>
+      ) : null}
     </div>
   );
 };

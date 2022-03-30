@@ -5,5 +5,16 @@ export interface IconProps {
 export interface ButtonInterface {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   children?: React.ReactNode;
+  type?: 'button' | 'reset' | 'submit' | undefined;
   className?: string;
+  alt?: boolean;
+}
+
+export interface Contact {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email?: string;
+  phoneNumber?: string;
+  whatsapp?: string;
 }

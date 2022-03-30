@@ -12,3 +12,7 @@ export const SHORT_MONTHS = [
   'Nov',
   'Dec',
 ];
+
+export const ERROR_MESSAGES = {
+  REQUIRED: 'This field is required',
+};

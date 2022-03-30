@@ -7,25 +7,23 @@ import EditIcon from '../../assets/svgs/edit';
 import GMailIcon from '../../assets/svgs/gmail';
 import OptionsIcon from '../../assets/svgs/options';
 import WhatsAppIcon from '../../assets/svgs/whatsapp';
+import { useContact } from '../../context/useContacts';
+import { Contact } from '../../interfaces/common';
+import { APIKit } from '../../services/api';
 import ConfirmationModal from '../Modals/Confirmations';
 import CardDropdown from './CardDropdown';
 
-interface Props {
-  firstName: string;
-  lastName: string;
-  email: string | undefined;
-  phoneNumber: string | undefined;
-  whatsapp: string | undefined;
-}
 function ContactCard({
+  id,
   firstName,
   lastName,
   email,
   phoneNumber,
   whatsapp,
-}: Props) {
+}: Contact) {
   const [isVisible, setVisibility] = useState(false);
   const [removeModal, setRemoveModal] = useState(false);
+  const { fetchData } = useContact();
   const toggleDropdown = useCallback(
     () => setVisibility(!isVisible),
     [isVisible]
@@ -105,8 +103,13 @@ function ContactCard({
           description='Are you sure that you want to delete?'
           confirm={{
             onClick: () => {
-              toast.success('Contact Removed!');
-              close();
+              APIKit.delete(`contacts/${id}`)
+                .then(() => toast.success('Contact Removed!'))
+                .catch(() => toast.error('Erro ao remover contacto!'))
+                .finally(() => {
+                  fetchData();
+                  close();
+                });
             },
             text: 'Delete',
           }}

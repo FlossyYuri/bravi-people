@@ -1,12 +1,14 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import toast, { Toaster } from 'react-hot-toast';
 import * as yup from 'yup';
 import Button from '../../components/Forms/Buttons/button';
 import TextInput from '../../components/Forms/Inputs/TextInput';
 import { Contact } from '../../interfaces/common';
 import { ERROR_MESSAGES } from '../../constants';
 import CloseIcon from '../../assets/svgs/close';
+import { APIKit } from '../../services/api';
 interface ContactFormInterface {
   close: () => void;
 }
@@ -45,7 +47,14 @@ function ContactForm({ close }: ContactFormInterface) {
     <div className='fade-spawn bg-slate-700 bg-opacity-40 w-screen h-screen fixed top-0 left-0 z-20 flex items-center justify-center'>
       <form
         onSubmit={handleSubmit((data) => {
-          alert(JSON.stringify(data));
+          APIKit.post('/contacts', data)
+            .then(() => {
+              close();
+              toast.success('Contacto cadastrado com sucesso!');
+            })
+            .catch(() => {
+              toast.error('Erro ao cadastrar contacto!');
+            });
         })}
         className='bg-white rounded-lg max-w-full w-modal p-4 relative'
       >
@@ -105,10 +114,13 @@ function ContactForm({ close }: ContactFormInterface) {
           />
         </div>
         <div className='flex mt-4 justify-center gap-4'>
-          <Button alt>Cancel</Button>
+          <Button onClick={() => close()} alt>
+            Cancel
+          </Button>
           <Button type='submit'>Save</Button>
         </div>
       </form>
+      <Toaster />
     </div>
   );
 }

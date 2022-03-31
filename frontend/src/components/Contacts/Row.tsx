@@ -14,7 +14,7 @@ import { APIKit } from '../../services/api';
 import ConfirmationModal from '../Modals/Confirmations';
 import CardDropdown from './CardDropdown';
 
-function ContactCard({
+function ContactRow({
   id,
   firstName,
   lastName,
@@ -33,21 +33,42 @@ function ContactCard({
   const close = useCallback(() => setRemoveModal(false), []);
   const options = useRef<HTMLButtonElement>(null);
   return (
-    <article className='bg-white flex flex-col rounded-xl overflow-hidden'>
-      <div className='flex w-full px-4 mt-4 justify-between'>
-        <div></div>
-        {/* <button className='group transition-all border border-main-dark-gray hover:border-main-blue w-9 h-9 flex justify-center items-center rounded-lg'>
-          <ChecklistIcon className='transition-all fill-main-dark-gray group-hover:fill-main-blue' />
-        </button> */}
-        <button
-          onClick={toggleDropdown}
-          ref={options}
-          className={`transition-all rounded-lg hover:shadow-custom ${
-            isVisible ? 'shadow-custom' : ''
-          }`}
-        >
-          <OptionsIcon />
-        </button>
+    <article className='bg-white flex flex-col rounded-xl overflow-hidden p-4'>
+      <div className='flex items-center justify-between flex-wrap gap-4 overflow-hidden'>
+        <div className='flex items-center gap-4'>
+          <div className='w-10 h-10 bg-main-gray rounded-full flex justify-center items-center'>
+            <div className='w-full h-full scale-90 bg-transparent border border-white rounded-full flex justify-center items-center'>
+              <span className='text-xl font-bold flex items-center'>{`${firstName[0]}${lastName[0]}`}</span>
+            </div>
+          </div>
+          <span className='font-xl font-bold h-min'>{`${firstName} ${lastName}`}</span>
+        </div>
+        <div className='flex ml-4 gap-4'>
+          <a href={`mailto:${email}`} className='scale-90'>
+            <GMailIcon />
+          </a>
+          <a
+            href={`https://wa.me/${whatsapp?.replaceAll(' ', '')}`}
+            className='scale-90'
+          >
+            <WhatsAppIcon />
+          </a>
+          <a
+            href={`tel:${phoneNumber?.replaceAll(' ', '')}`}
+            className='scale-90'
+          >
+            <CellIcon />
+          </a>
+          <button
+            onClick={toggleDropdown}
+            ref={options}
+            className={`transition-all rounded-lg hover:shadow-custom self-end ${
+              isVisible ? 'shadow-custom' : ''
+            }`}
+          >
+            <OptionsIcon />
+          </button>
+        </div>
       </div>
       <CardDropdown
         parentRef={options}
@@ -74,33 +95,6 @@ function ContactCard({
           },
         ]}
       />
-      <div className='px-4 -mt-4 mb-4 w-full flex flex-col items-center flex-1'>
-        <div className='w-24 h-24 bg-main-gray rounded-full flex justify-center items-center'>
-          <div className='w-full h-full scale-90 bg-transparent border border-white rounded-full flex justify-center items-center'>
-            <span className='text-5xl font-bold'>{`${firstName[0]}${lastName[0]}`}</span>
-          </div>
-        </div>
-        <p className='font-xl font-bold'>{`${firstName} ${lastName}`}</p>
-        <p>{email}</p>
-        <p>{phoneNumber}</p>
-      </div>
-      <div className='w-full py-1 bg-main-gray flex justify-evenly'>
-        <a href={`mailto:${email}`} className='scale-90'>
-          <GMailIcon />
-        </a>
-        <a
-          href={`https://wa.me/${whatsapp?.replaceAll(' ', '')}`}
-          className='scale-90'
-        >
-          <WhatsAppIcon />
-        </a>
-        <a
-          href={`tel:${phoneNumber?.replaceAll(' ', '')}`}
-          className='scale-90'
-        >
-          <CellIcon />
-        </a>
-      </div>
       <Toaster
         toastOptions={{
           style: TOAST_STYLE,
@@ -144,4 +138,4 @@ function ContactCard({
   );
 }
 
-export default ContactCard;
+export default ContactRow;

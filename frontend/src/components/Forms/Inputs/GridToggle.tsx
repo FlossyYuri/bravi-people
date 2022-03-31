@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import GridIcon from '../../../assets/svgs/grid';
 import ListIcon from '../../../assets/svgs/list';
 

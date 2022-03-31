@@ -1,5 +1,4 @@
 import React from 'react';
-import { RegisterOptions, UseFormRegister } from 'react-hook-form';
 import SearchIcon from '../../../assets/svgs/search';
 
 interface TextInputProps {

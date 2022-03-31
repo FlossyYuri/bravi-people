@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ArrowUpDownIcon from '../assets/svgs/arrowUpDown';
 import ContactCard from '../components/Contacts/Card';
+import ContactRow from '../components/Contacts/Row';
 import AlternativeButton from '../components/Forms/Buttons/alternativeButton';
 import Button from '../components/Forms/Buttons/button';
 import GridToggle from '../components/Forms/Inputs/GridToggle';
@@ -56,11 +57,19 @@ function Contacts() {
           Add
         </Button>
       </div>
-      <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4'>
-        {contacts.map((contact) => (
-          <ContactCard key={contact.id} {...contact} />
-        ))}
-      </section>
+      {grid ? (
+        <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4'>
+          {contacts.map((contact) => (
+            <ContactCard key={contact.id} {...contact} />
+          ))}
+        </section>
+      ) : (
+        <section className='grid grid-cols-1  gap-4'>
+          {contacts.map((contact) => (
+            <ContactRow key={contact.id} {...contact} />
+          ))}
+        </section>
+      )}
 
       {formModal ? (
         <ContactForm

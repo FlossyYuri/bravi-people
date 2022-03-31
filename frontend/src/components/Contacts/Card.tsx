@@ -36,9 +36,10 @@ function ContactCard({
   return (
     <article className='bg-white flex flex-col rounded-xl overflow-hidden'>
       <div className='flex w-full px-4 mt-4 justify-between'>
-        <button className='group transition-all border border-main-dark-gray hover:border-main-blue w-9 h-9 flex justify-center items-center rounded-lg'>
+        <div></div>
+        {/* <button className='group transition-all border border-main-dark-gray hover:border-main-blue w-9 h-9 flex justify-center items-center rounded-lg'>
           <ChecklistIcon className='transition-all fill-main-dark-gray group-hover:fill-main-blue' />
-        </button>
+        </button> */}
         <button
           onClick={toggleDropdown}
           ref={options}
@@ -77,7 +78,7 @@ function ContactCard({
       <div className='px-4 -mt-4 mb-4 w-full flex flex-col items-center'>
         <div className='w-24 h-24 bg-main-gray rounded-full flex justify-center items-center'>
           <div className='w-full h-full scale-90 bg-transparent border border-white rounded-full flex justify-center items-center'>
-            <span className='text-7xl font-bold'>#</span>
+            <span className='text-5xl font-bold'>{`${firstName[0]}${lastName[0]}`}</span>
           </div>
         </div>
         <p className='font-xl font-bold'>{`${firstName} ${lastName}`}</p>

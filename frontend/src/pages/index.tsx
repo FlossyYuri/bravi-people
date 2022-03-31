@@ -4,7 +4,7 @@ import ContactCard from '../components/Contacts/Card';
 import AlternativeButton from '../components/Forms/Buttons/alternativeButton';
 import Button from '../components/Forms/Buttons/button';
 import GridToggle from '../components/Forms/Inputs/GridToggle';
-import TextInput from '../components/Forms/Inputs/TextInput';
+import SearchTextInput from '../components/Forms/Inputs/Search';
 import { useContact } from '../context/useContacts';
 import ContactForm from './Contacts/form';
 
@@ -25,7 +25,7 @@ function Contacts() {
       <h1 className='font-bold text-2xl'>Contacts</h1>
       <div className='flex mt-2 mb-8 justify-between flex-wrap'>
         <div className='grid grid-cols-2 w-full sm:w-auto sm:flex gap-4 flex-wrap'>
-          <TextInput
+          <SearchTextInput
             className='w-full sm:w-52 col-span-2'
             search
             onChange={(e) => setParams({ ...params, name: e.target.value })}

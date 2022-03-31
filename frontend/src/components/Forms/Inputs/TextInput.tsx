@@ -12,8 +12,7 @@ interface TextInputProps {
   disabled?: boolean;
   search?: boolean;
   errors?: any;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  register?: UseFormRegister<any>;
+  register: UseFormRegister<any>;
 }
 const TextInput = ({
   name,
@@ -22,7 +21,6 @@ const TextInput = ({
   validation = {},
   placeholder,
   register,
-  onChange,
   className = '',
   disabled,
   errors,
@@ -43,11 +41,7 @@ const TextInput = ({
           type={type}
           placeholder={placeholder}
           disabled={disabled}
-          onChange={onChange}
-          {...() => {
-            if (register) return register(name, validation);
-            return {};
-          }}
+          {...register(name, validation)}
         />
         {search ? <SearchIcon className='absolute right-4' /> : null}
       </div>

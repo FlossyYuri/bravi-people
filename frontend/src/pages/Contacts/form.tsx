@@ -34,6 +34,7 @@ function ContactForm({ close, update, contact }: ContactFormInterface) {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<Contact>({
     resolver: yupResolver(schema),
@@ -84,7 +85,11 @@ function ContactForm({ close, update, contact }: ContactFormInterface) {
         </button>
         <div className='w-40 h-40 mt-0 sm:-mt-24 bg-main-gray rounded-full flex justify-center items-center mx-auto'>
           <div className='w-full h-full scale-90 bg-transparent border border-white rounded-full flex justify-center items-center'>
-            <span className='text-8xl font-bold'>#</span>
+            <span className='text-8xl font-bold'>{`${
+              watch('firstName') || watch('lastName')
+                ? `${watch('firstName')[0] || ''}${watch('lastName')[0] || ''}`
+                : '#'
+            }`}</span>
           </div>
         </div>
         <h2 className='text-2xl font-bold mt-4'>

@@ -19,3 +19,6 @@ export interface Contact {
   phoneNumber?: string;
   whatsapp?: string;
 }
+export interface DashboardInterface {
+  totalContacts: number;
+}

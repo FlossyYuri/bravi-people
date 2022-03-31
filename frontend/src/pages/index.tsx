@@ -1,86 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import ArrowUpDownIcon from '../assets/svgs/arrowUpDown';
-import ContactCard from '../components/Contacts/Card';
-import ContactRow from '../components/Contacts/Row';
-import AlternativeButton from '../components/Forms/Buttons/alternativeButton';
-import Button from '../components/Forms/Buttons/button';
-import GridToggle from '../components/Forms/Inputs/GridToggle';
-import SearchTextInput from '../components/Forms/Inputs/Search';
-import { useContact } from '../context/useContacts';
-import ContactForm from './Contacts/form';
+import { AxiosResponse } from 'axios';
+import React, { useCallback, useEffect, useState } from 'react';
+import { DashboardInterface } from '../interfaces/common';
+import { APIKit } from '../services/api';
 
-interface Query {
-  sort?: 'ASC' | 'DESC' | '';
-  name?: string;
-}
-function Contacts() {
-  const [formModal, setFormModal] = useState(false);
-  const [grid, setToggle] = useState<boolean>(true);
-  const [params, setParams] = useState<Query>({ sort: 'ASC' });
-  const { contacts, fetchData } = useContact();
+function Dashboard() {
+  const [dashboard, setDashboard] = useState<DashboardInterface>();
+  const fetchData = useCallback((params?) => {
+    APIKit.get<DashboardInterface>('/dashboard', { params }).then(
+      (response: AxiosResponse<DashboardInterface>) => {
+        setDashboard(response.data);
+      }
+    );
+  }, []);
+
   useEffect(() => {
-    fetchData(params);
-  }, [params, fetchData]);
+    fetchData();
+  }, [fetchData]);
   return (
-    <section className='p-8'>
-      <h1 className='font-bold text-2xl'>Contacts</h1>
-      <div className='flex mt-2 mb-8 justify-between flex-wrap'>
-        <div className='grid grid-cols-2 w-full sm:w-auto sm:flex gap-4 flex-wrap'>
-          <SearchTextInput
-            className='w-full sm:w-52 col-span-2'
-            search
-            onChange={(e) => setParams({ ...params, name: e.target.value })}
-            name='search'
-            placeholder='Search'
-          />
-          <AlternativeButton
-            onClick={() =>
-              setParams({
-                ...params,
-                sort: params?.sort === 'ASC' ? 'DESC' : 'ASC',
-              })
-            }
-            active={params.sort === 'ASC'}
-            className='flex items-center justify-center text-main-text'
-          >
-            A-Z <ArrowUpDownIcon className='ml-2' />
-          </AlternativeButton>
-          <GridToggle
-            className='col-span-1 justify-center'
-            grid={grid}
-            toggle={() => {
-              setToggle(!grid);
-            }}
-          />
-        </div>
-        <Button className='mt-4 sm:mt-0' onClick={() => setFormModal(true)}>
-          Add
-        </Button>
+    <section className='p-8 w-full h-full flex flex-col justify-center items-center'>
+      <div className='w-48 h-48 bg-main-gray rounded-full flex justify-center items-center text-8xl font-bold'>
+        {dashboard?.totalContacts}
       </div>
-      {grid ? (
-        <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4'>
-          {contacts.map((contact) => (
-            <ContactCard key={contact.id} {...contact} />
-          ))}
-        </section>
-      ) : (
-        <section className='grid grid-cols-1  gap-4'>
-          {contacts.map((contact) => (
-            <ContactRow key={contact.id} {...contact} />
-          ))}
-        </section>
-      )}
-
-      {formModal ? (
-        <ContactForm
-          close={() => {
-            setFormModal(false);
-            fetchData();
-          }}
-        />
-      ) : null}
+      <h1 className='text-2xl font-bold mt-4'>Total Contacts</h1>
     </section>
   );
 }
 
-export default Contacts;
+export default Dashboard;
